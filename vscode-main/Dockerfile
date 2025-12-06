@@ -1,6 +1,6 @@
 # Dockerfile pour Render - VS Code Server
-# Version: 1.0.3 - Fixed npm ci issue, use npm install
-# Last update: 2025-12-06
+# Version: 1.0.4 - Force rebuild - npm install instead of npm ci
+# Last update: 2025-12-06 19:00 UTC
 FROM node:22-slim
 
 # Installer les dépendances système nécessaires pour compiler VS Code
@@ -17,7 +17,7 @@ WORKDIR /app
 # Copier les fichiers de dépendances en premier (pour optimiser le cache Docker)
 COPY package*.json ./
 
-# Installer les dépendances npm
+# Installer les dépendances npm (utilise npm install au lieu de npm ci)
 RUN npm install
 
 # Copier le reste du code source
