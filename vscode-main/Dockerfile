@@ -14,7 +14,6 @@ WORKDIR /app
 
 # Copier les fichiers de dépendances en premier (pour optimiser le cache Docker)
 COPY package*.json ./
-COPY build ./build
 
 # Installer les dépendances npm
 RUN npm ci
