@@ -1,5 +1,6 @@
 # Dockerfile pour Render - VS Code Server
-# Version: 1.0.2 - Fixed build directory issue
+# Version: 1.0.3 - Fixed npm ci issue, use npm install
+# Last update: 2025-12-06
 FROM node:22-slim
 
 # Installer les dépendances système nécessaires pour compiler VS Code
