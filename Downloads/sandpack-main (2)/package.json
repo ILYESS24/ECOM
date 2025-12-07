@@ -6,19 +6,8 @@
   "scripts": {
     "start": "python -m http.server 8000 || npx http-server -p 8000",
     "dev": "npm run start",
-    "deploy": "node deploy.js",
-    "deploy:netlify": "node deploy.js netlify",
-    "deploy:vercel": "node deploy.js vercel",
-    "deploy:surge": "node deploy.js surge",
-    "deploy:github": "node deploy.js github",
-    "build": "echo 'No build step required - this is a static site'",
-    "preview": "npm run start",
-    "ci": "node ci-cd.js ci",
-    "cd": "node ci-cd.js cd",
-    "ci-cd": "node ci-cd.js full",
-    "lint": "echo 'Running lint checks...' && node -c deploy.js",
-    "test": "echo 'Running tests...' && node -e \"console.log('All syntax checks passed!')\"",
-    "vercel-build": "echo 'Static site - no build needed'"
+    "build": "echo 'Static site - no build needed'",
+    "preview": "npm run start"
   },
   "keywords": [
     "code-editor",
