@@ -29,11 +29,10 @@ RUN composer install --no-interaction --optimize-autoloader --no-dev
 # Copy application files
 COPY . .
 
-# Create config.php files (required for OpenCart installation)
+# Create empty config.php files (required for OpenCart installation)
+# Files must be empty (0 bytes) so the installer doesn't try to read DB constants
 RUN touch /var/www/html/upload/config.php \
-    && touch /var/www/html/upload/admin/config.php \
-    && echo '<?php' > /var/www/html/upload/config.php \
-    && echo '<?php' > /var/www/html/upload/admin/config.php
+    && touch /var/www/html/upload/admin/config.php
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \
