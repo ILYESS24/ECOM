@@ -3,8 +3,9 @@ services:
     name: opencart
     runtime: docker
     plan: starter
-    dockerfilePath: Dockerfile
-    dockerContext: .
+    dockerfilePath: Downloads/opencart-master/opencart-master/Dockerfile
+    rootDir: Downloads/opencart-master/opencart-master
+    dockerContext: Downloads/opencart-master/opencart-master
     envVars:
       - key: PHP_VERSION
         value: 8.2
