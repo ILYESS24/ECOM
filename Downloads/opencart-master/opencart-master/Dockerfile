@@ -20,8 +20,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy composer files
-COPY composer.json composer.lock ./
+# Copy composer files (composer.lock is optional)
+COPY composer.json ./
+COPY composer.lock* ./
 
 # Install PHP dependencies
 RUN composer install --no-interaction --optimize-autoloader --no-dev
