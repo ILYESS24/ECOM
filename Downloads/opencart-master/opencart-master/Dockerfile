@@ -22,8 +22,6 @@ WORKDIR /var/www/html
 
 # Copy composer files
 COPY composer.json ./
-# Copy composer.lock if it exists (optional)
-COPY composer.lock* ./ || true
 
 # Install PHP dependencies (composer.lock will be generated if missing)
 RUN composer install --no-interaction --optimize-autoloader --no-dev || composer update --no-interaction --optimize-autoloader --no-dev
