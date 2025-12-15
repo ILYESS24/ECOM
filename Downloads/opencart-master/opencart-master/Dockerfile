@@ -64,4 +64,3 @@ EXPOSE 8080
 
 # Start Apache
 CMD apache2-foreground
-
