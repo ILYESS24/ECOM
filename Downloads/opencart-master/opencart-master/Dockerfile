@@ -46,10 +46,11 @@ RUN echo '<VirtualHost *:${PORT}>\n\
     ServerAdmin webmaster@localhost\n\
     DocumentRoot /var/www/html/upload\n\
     <Directory /var/www/html/upload>\n\
-        Options Indexes FollowSymLinks\n\
+        Options Indexes FollowSymLinks MultiViews\n\
         AllowOverride All\n\
         Require all granted\n\
     </Directory>\n\
+    DirectoryIndex index.php index.html\n\
     ErrorLog ${APACHE_LOG_DIR}/error.log\n\
     CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
 </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
