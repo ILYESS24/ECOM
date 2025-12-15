@@ -1,0 +1,11 @@
+tools/daux.io/Dockerfile
+tools/Dockerfile
+docker/**/Dockerfile
+node_modules
+.git
+.gitignore
+README.md
+DEPLOY_RENDER.md
+*.md
+.env
+.env.*
