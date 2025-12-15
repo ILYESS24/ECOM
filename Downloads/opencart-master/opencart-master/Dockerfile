@@ -37,26 +37,15 @@ RUN chown -R www-data:www-data /var/www/html \
 # Configure Apache
 RUN a2enmod rewrite
 
-# Configure Apache to use Render's $PORT environment variable
-ENV PORT 10000
-RUN sed -i "s/Listen 80/Listen \${PORT}/" /etc/apache2/ports.conf
+# Configure Apache to use Render's PORT environment variable (defaults to 10000)
+ENV PORT=10000
+RUN sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf
 
-# Create Apache virtual host configuration using $PORT
-RUN echo '<VirtualHost *:${PORT}>\n\
-    ServerAdmin webmaster@localhost\n\
-    DocumentRoot /var/www/html/upload\n\
-    <Directory /var/www/html/upload>\n\
-        Options Indexes FollowSymLinks MultiViews\n\
-        AllowOverride All\n\
-        Require all granted\n\
-    </Directory>\n\
-    DirectoryIndex index.php index.html\n\
-    ErrorLog ${APACHE_LOG_DIR}/error.log\n\
-    CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
-</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+# Copy Apache virtual host configuration
+COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
 
 # Set document root to upload directory
-ENV APACHE_DOCUMENT_ROOT /var/www/html/upload
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/upload
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
