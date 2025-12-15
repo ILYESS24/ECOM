@@ -29,10 +29,18 @@ RUN composer install --no-interaction --optimize-autoloader --no-dev
 # Copy application files
 COPY . .
 
+# Create config.php files (required for OpenCart installation)
+RUN touch /var/www/html/upload/config.php \
+    && touch /var/www/html/upload/admin/config.php \
+    && echo '<?php' > /var/www/html/upload/config.php \
+    && echo '<?php' > /var/www/html/upload/admin/config.php
+
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html \
-    && chmod -R 777 /var/www/html/upload/system/storage
+    && chmod -R 777 /var/www/html/upload/system/storage \
+    && chmod 777 /var/www/html/upload/config.php \
+    && chmod 777 /var/www/html/upload/admin/config.php
 
 # Configure Apache
 RUN a2enmod rewrite
