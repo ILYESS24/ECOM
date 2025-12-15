@@ -1,10 +1,9 @@
 services:
   - type: web
     name: opencart
-    runtime: php
+    runtime: docker
     plan: starter
-    buildCommand: composer install --no-interaction --optimize-autoloader
-    startCommand: php -S 0.0.0.0:$PORT -t upload
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: PHP_VERSION
         value: 8.2
