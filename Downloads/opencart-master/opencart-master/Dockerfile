@@ -41,16 +41,14 @@ RUN a2enmod rewrite
 ENV PORT=10000
 RUN sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf
 
-# Copy Apache virtual host configuration
-COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
-
-# Set document root to upload directory
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/upload
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
 # Ensure upload directory exists and has proper permissions
 RUN mkdir -p /var/www/html/upload
+
+# Copy Apache virtual host configuration (AFTER mkdir to avoid sed issues)
+COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
+
+# Set document root environment variable (for reference only)
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/upload
 
 # Port is exposed via PORT environment variable
 
